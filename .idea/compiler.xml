@@ -10,6 +10,7 @@
         <module name="ejercicio4" />
         <module name="ejercicio1-wallpost" />
         <module name="ejercicio5" />
+        <module name="EjercicioDemo" />
         <module name="ejercicio6" />
       </profile>
     </annotationProcessing>
