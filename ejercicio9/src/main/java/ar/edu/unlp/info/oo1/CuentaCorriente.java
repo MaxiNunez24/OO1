@@ -1,29 +1,22 @@
 package ar.edu.unlp.info.oo1;
 
 public class CuentaCorriente extends Cuenta{
-    private double limiteDescubierto;
+    private double descubierto;
 
     public CuentaCorriente(){
         super();
-        this.limiteDescubierto = 0;
+        this.descubierto = 0;
     }
 
-    public double getLimiteDescubierto(){
-        return this.limiteDescubierto;
+    public double getDescubierto(){
+        return this.descubierto;
     }
 
-    public void setLimiteDescubierto(double limite){
-        this.limiteDescubierto = limite;
+    public void setDescubierto(double limite){
+        this.descubierto = limite;
     }
 
     public boolean puedeExtraer(double monto){
-        if(this.getSaldo() >= monto){
-            return true;
-        }
-        if(this.getLimiteDescubierto()<=0){
-            return false;
-        }
-        this.setLimiteDescubierto(this.getLimiteDescubierto() - this.getSaldo() - monto);
-        return this.getLimiteDescubierto() >= monto;
+        return this.getDescubierto() >= Math.abs(this.getSaldo() - monto);
     }
 }
