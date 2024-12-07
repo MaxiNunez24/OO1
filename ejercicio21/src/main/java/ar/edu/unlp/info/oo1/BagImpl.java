@@ -34,7 +34,7 @@ public class BagImpl<T> extends AbstractCollection<T> implements Bag<T> {
         if(elements.containsKey(element)){
             int aux = Integer.parseInt(String.valueOf(elements.get(element)));
             int i = aux > 0 ? aux += -1 : aux;
-            elements.put(element, i);
+            elements.replace(element, i);
         }
     }
 
