@@ -7,8 +7,8 @@ public class Inversor {
     private String nombre;
     private List<Inversion> inversiones;
 
-    public Inversor() {
-        this.nombre = "Sin nombre";
+    public Inversor(String nombre) {
+        this.nombre = nombre;
         this.inversiones = new ArrayList<>();
     }
 
@@ -20,7 +20,17 @@ public class Inversor {
         this.nombre = nombre;
     }
 
+    public void agregarInversion(Inversion inversion) {
+        this.inversiones.add(inversion);
+    }
 
+    public void quitarInversion(Inversion inversion) {
+        this.inversiones.remove(inversion);
+    }
+
+    public double valorActual(){
+       return  inversiones.stream().mapToDouble(Inversion::calcularValor).sum();
+    }
 
 
 }

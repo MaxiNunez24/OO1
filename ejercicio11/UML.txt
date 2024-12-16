@@ -1,0 +1,26 @@
+@startuml
+
+class InversionEnAcciones implements Inversion{
+    -nombre: String
+    -cantidad: Integer
+    -valorUnitario: Real
+}
+
+class PlazoFijo implements Inversion{
+    -fechaDeConstitucion: LocalDate
+    -montoDepositado: Real
+    -porcentajeDeInteresDiario: Real
+}
+
+class Inversor{
+    -nombre: String
+    +valorActual(): Real
+}
+
+interface Inversion{
+    +calcularValorActual(): Real
+}
+
+Inversor --|> "*" Inversion: inversiones
+
+@enduml
