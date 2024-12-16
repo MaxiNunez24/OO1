@@ -2,10 +2,11 @@ package ar.edu.unlp.info.oo1.ej10_jobScheduler;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ar.edu.unlp.info.oo1.ej10_jobScheduler.JobDescription;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class JobSchedulerTest {
+public class JobSchedulerEnunciadoTest {
     protected JobDescription firstJob;
     protected JobDescription highestPriorityJob;
     protected JobDescription mostEffortJob;
@@ -24,23 +25,47 @@ public class JobSchedulerTest {
         this.initializeJobs();
     }
 
-    private void scheduleJobsIn(JobScheduler aJobScheduler) {
-        aJobScheduler.schedule(firstJob);
-        aJobScheduler.schedule(highestPriorityJob);
-        aJobScheduler.schedule(mostEffortJob);
-        aJobScheduler.schedule(lastJob);
+    private JobSchedulerEnunciado newFifoScheduler() {
+        JobSchedulerEnunciado fifoScheduler = new JobSchedulerEnunciado();
+        fifoScheduler.setStrategy("FIFO");
+        return fifoScheduler;
+    }
+
+    private JobSchedulerEnunciado newLifoScheduler() {
+        JobSchedulerEnunciado lifoScheduler = new JobSchedulerEnunciado();
+        lifoScheduler.setStrategy("LIFO");
+        return lifoScheduler;
+    }
+
+    private JobSchedulerEnunciado newPriorityScheduler() {
+        JobSchedulerEnunciado priorityScheduler = new JobSchedulerEnunciado();
+        priorityScheduler.setStrategy("HighestPriority");
+        return priorityScheduler;
+    }
+
+    private JobSchedulerEnunciado newEffortScheduler() {
+        JobSchedulerEnunciado effortScheduler = new JobSchedulerEnunciado();
+        effortScheduler.setStrategy("MostEffort");
+        return effortScheduler;
+    }
+
+    private void scheduleJobsIn(JobSchedulerEnunciado aJobSchedulerEnunciado) {
+        aJobSchedulerEnunciado.schedule(firstJob);
+        aJobSchedulerEnunciado.schedule(highestPriorityJob);
+        aJobSchedulerEnunciado.schedule(mostEffortJob);
+        aJobSchedulerEnunciado.schedule(lastJob);
     }
 
     @Test
     void testSchedule() {
-        JobScheduler aScheduler = new FIFO();
+        JobSchedulerEnunciado aScheduler = new JobSchedulerEnunciado();
         aScheduler.schedule(highestPriorityJob);
         assertTrue(aScheduler.getJobs().contains(highestPriorityJob));
     }
 
     @Test
     void testUnschedule() {
-        JobScheduler aScheduler = new MostEffort();
+        JobSchedulerEnunciado aScheduler = new JobSchedulerEnunciado();
         this.scheduleJobsIn(aScheduler);
         aScheduler.unschedule(highestPriorityJob);
         assertFalse(aScheduler.getJobs().contains(highestPriorityJob));
@@ -48,24 +73,24 @@ public class JobSchedulerTest {
 
     @Test
     void testNext() {
-        JobScheduler scheduler;
+        JobSchedulerEnunciado scheduler;
 
-        scheduler = new FIFO();
+        scheduler = this.newFifoScheduler();
         this.scheduleJobsIn(scheduler);
         assertEquals(scheduler.next(), firstJob);
         assertEquals(scheduler.getJobs().size(), 3);
 
-        scheduler = new LIFO();
+        scheduler = this.newLifoScheduler();
         this.scheduleJobsIn(scheduler);
         assertEquals(scheduler.next(), lastJob);
         assertEquals(scheduler.getJobs().size(), 3);
 
-        scheduler = new HighestPriority();
+        scheduler = this.newPriorityScheduler();
         this.scheduleJobsIn(scheduler);
         assertEquals(scheduler.next(), highestPriorityJob);
         assertEquals(scheduler.getJobs().size(), 3);
 
-        scheduler = new MostEffort();
+        scheduler = this.newEffortScheduler();
         this.scheduleJobsIn(scheduler);
         assertEquals(scheduler.next(), mostEffortJob);
         assertEquals(scheduler.getJobs().size(), 3);
