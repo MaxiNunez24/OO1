@@ -6,13 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ej10-job_scheduler" />
         <module name="EjercicioDemo" />
         <module name="ejercicio5 (1)" />
+        <module name="parcial2" />
         <module name="EjercicioDemo (1)" />
         <module name="ejercicio5 (2)" />
         <module name="ejercicio3" />
         <module name="ejercicio4" />
+        <module name="ejercicio12" />
         <module name="ejercicio11" />
         <module name="ejercicio10" />
         <module name="ejercicio21" />
@@ -21,11 +22,11 @@
         <module name="ejercicio6" />
         <module name="ejercicio14" />
         <module name="ejercicio1-wallpost" />
-        <module name="ejercicio9" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ejercicio5 (3)" target="23" />
+      <module name="ejercicio19" target="23" />
+      <module name="EjercicioDemo (2)" target="23" />
     </bytecodeTargetLevel>
   </component>
 </project>
